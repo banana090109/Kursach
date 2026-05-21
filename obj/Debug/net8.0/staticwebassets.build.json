@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rawKF3ep4FLwUr/w7cui8Mgyw+v5tiwj8WQYF/ZMCA0=",
+  "Hash": "JflZOPNcPEmibzwv9sEG2qX0jWwekKi0PMbKg5Vt4Kg=",
   "Source": "BuildStore",
   "BasePath": "_content/BuildStore",
   "Mode": "Default",
@@ -99,6 +99,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Projects\\С#\\BuildStore\\wwwroot\\images\\products\\drill.png",
+      "SourceId": "BuildStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\С#\\BuildStore\\wwwroot\\",
+      "BasePath": "_content/BuildStore",
+      "RelativePath": "images/products/drill#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7dfkwalbc7",
+      "Integrity": "yyIuTLQPYE56H3yy7U9q4X7boILOhgVx8bIbo1s/TgU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\drill.png"
     },
     {
       "Identity": "D:\\Projects\\С#\\BuildStore\\wwwroot\\js\\site.js",
@@ -1645,6 +1666,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/drill.7dfkwalbc7.png",
+      "AssetFile": "D:\\Projects\\С#\\BuildStore\\wwwroot\\images\\products\\drill.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11580"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yyIuTLQPYE56H3yy7U9q4X7boILOhgVx8bIbo1s/TgU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 May 2026 10:36:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7dfkwalbc7"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/drill.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yyIuTLQPYE56H3yy7U9q4X7boILOhgVx8bIbo1s/TgU="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/drill.png",
+      "AssetFile": "D:\\Projects\\С#\\BuildStore\\wwwroot\\images\\products\\drill.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11580"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yyIuTLQPYE56H3yy7U9q4X7boILOhgVx8bIbo1s/TgU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 21 May 2026 10:36:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yyIuTLQPYE56H3yy7U9q4X7boILOhgVx8bIbo1s/TgU="
         }
       ]
     },

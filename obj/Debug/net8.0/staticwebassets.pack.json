@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\Projects\\С#\\BuildStore\\wwwroot\\images\\products\\drill.png",
+      "PackagePath": "staticwebassets\\images\\products\\drill.png"
+    },
+    {
       "Id": "D:\\Projects\\С#\\BuildStore\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
