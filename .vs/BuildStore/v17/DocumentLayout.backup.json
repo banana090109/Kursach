@@ -1,0 +1,190 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\\u0421#\\BuildStore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\models\\buildingmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:models\\buildingmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\models\\handtool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:models\\handtool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\models\\electricaltool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:models\\electricaltool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\buildstore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:buildstore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|d:\\projects\\\u0441#\\buildstore\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{79AB7563-13F6-4C74-8514-93B8B7479651}|BuildStore.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "Models\\Category.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Models\\Category.cs",
+              "RelativeToolTip": "Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:14:10.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-21T06:07:58.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-21T06:05:40.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BuildStore",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\BuildStore.csproj",
+              "RelativeDocumentMoniker": "BuildStore.csproj",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\BuildStore.csproj",
+              "RelativeToolTip": "BuildStore.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-21T06:05:19.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BuildingMaterial.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Models\\BuildingMaterial.cs",
+              "RelativeDocumentMoniker": "Models\\BuildingMaterial.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Models\\BuildingMaterial.cs",
+              "RelativeToolTip": "Models\\BuildingMaterial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:04:07.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HandTool.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Models\\HandTool.cs",
+              "RelativeDocumentMoniker": "Models\\HandTool.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Models\\HandTool.cs",
+              "RelativeToolTip": "Models\\HandTool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:03:31.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ElectricalTool.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Models\\ElectricalTool.cs",
+              "RelativeDocumentMoniker": "Models\\ElectricalTool.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Models\\ElectricalTool.cs",
+              "RelativeToolTip": "Models\\ElectricalTool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:00:26.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T05:59:46.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T16:18:43.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Projects\\\u0421#\\BuildStore\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "D:\\Projects\\\u0421#\\BuildStore\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-20T16:15:14.992Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

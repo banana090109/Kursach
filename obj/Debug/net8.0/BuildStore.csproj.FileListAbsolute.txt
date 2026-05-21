@@ -1,0 +1,9 @@
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.csproj.AssemblyReference.cache
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.AssemblyInfoInputs.cache
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.AssemblyInfo.cs
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.csproj.CoreCompileInputs.cache
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.RazorAssemblyInfo.cache
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.RazorAssemblyInfo.cs
+D:\Projects\С#\BuildStore\obj\Debug\net8.0\BuildStore.sourcelink.json
