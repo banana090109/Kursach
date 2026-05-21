@@ -14,8 +14,6 @@
 
         public string ImagePath { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
         public List<Category> Categories { get; set; } = new();
     }
 }

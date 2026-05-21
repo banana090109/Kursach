@@ -1,0 +1,49 @@
+﻿@model BuildStore.Models.ElectricalTool
+
+<h1>Create Product</h1>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label>Name</label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label>Description</label>
+        <input asp-for="Description" />
+    </div>
+
+    <div>
+        <label>Price</label>
+        <input asp-for="Price" />
+    </div>
+
+    <div>
+        <label>Quantity</label>
+        <input asp-for="QuantityInStock" />
+    </div>
+
+    <div>
+        <label>Image Path</label>
+        <input asp-for="ImagePath" />
+    </div>
+
+    <div>
+        <label>Power Watts</label>
+        <input asp-for="PowerWatts" />
+    </div>
+
+    <div>
+        <label>Battery Powered</label>
+        <input asp-for="BatteryPowered" type="checkbox" />
+    </div>
+
+    <div>
+        <label>Warranty Months</label>
+        <input asp-for="WarrantyMonths" />
+    </div>
+
+    <button type="submit">Create</button>
+
+</form>
