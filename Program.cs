@@ -1,6 +1,6 @@
 using BuildStore.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BuildStore
 {
@@ -12,10 +12,15 @@ namespace BuildStore
 
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<AppDbContext>(options => 
+            builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            
+            builder.Services
+            .AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options => { options.LoginPath = "/Account/Login"; });
+                    
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -31,6 +36,8 @@ namespace BuildStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();//1111111111111111111111111111
 
             app.UseAuthorization();
 

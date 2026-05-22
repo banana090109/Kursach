@@ -1,0 +1,142 @@
+﻿@model BuildStore.Models.Product
+
+<div class="container mt-5 mb-5">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <img src="/@Model.ImagePath"
+                 class="img-fluid border rounded p-3 shadow-sm"
+                 style="height:500px; width:100%; object-fit:contain; background:white;">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h1 style="word-break: break-word;">
+                @Model.Name
+            </h1>
+
+@*             <h1 class="mb-3" style="overflow-wrap:anywhere;">
+                @Model.Name
+            </h1> *@
+
+            <p class="text-muted">
+
+                @(Model switch
+                {
+                    BuildStore.Models.ElectricalTool => "Electrical Tool",
+                    BuildStore.Models.HandTool => "Hand Tool",
+                    BuildStore.Models.ConstructionMaterial => "Construction Material",
+                    _ => "Unknown"
+                })
+
+            </p>
+
+            <h2 class="text-success mb-4">
+                @Model.Price $
+            </h2>
+
+            <p style="word-break: break-word;">
+                @Model.Description
+            </p>
+
+            <p>
+                <strong>In stock:</strong>
+                @Model.QuantityInStock
+            </p>
+
+            <hr />
+
+            @if (Model is BuildStore.Models.ElectricalTool electrical)
+            {
+                <h4>Electrical Specifications</h4>
+
+                <p>
+                    <strong>Power:</strong>
+                    @electrical.PowerWatts W
+                </p>
+
+                <p>
+                    <strong>Battery Powered:</strong>
+                    @electrical.BatteryPowered
+                </p>
+
+                <p>
+                    <strong>Warranty:</strong>
+                    @electrical.WarrantyMonths months
+                </p>
+            }
+
+            @if (Model is BuildStore.Models.HandTool handTool)
+            {
+                <h4>Hand Tool Specifications</h4>
+
+                <p>
+                    <strong>Material:</strong>
+                    @handTool.Material
+                </p>
+
+                <p>
+                    <strong>Professional:</strong>
+                    @handTool.ProfessionalSeries
+                </p>
+            }
+
+            @if (Model is BuildStore.Models.ConstructionMaterial material)
+            {
+                <h4>Material Specifications</h4>
+
+                <p>
+                    <strong>Weight:</strong>
+                    @material.Weight
+                </p>
+
+                <p>
+                    <strong>Unit:</strong>
+                    @material.Unit
+                </p>
+            }
+
+            <hr />
+
+            <h5>Categories</h5>
+
+            @if (Model.Categories.Any())
+            {
+                @foreach (var category in Model.Categories)
+                {
+                    <a asp-controller="Product"
+                       asp-action="Category"
+                       asp-route-name="@category.Name"
+                       class="badge bg-dark text-decoration-none me-2">
+
+                        @category.Name
+
+                    </a>
+                }
+            }
+            else
+            {
+                <p>No categories.</p>
+            }
+
+            <div class="mt-4">
+
+                <a asp-controller="Cart"
+                   asp-action="Add"
+                   asp-route-productId="@Model.Id"
+                   class="btn btn-dark btn-lg">
+
+                    Add To Cart
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

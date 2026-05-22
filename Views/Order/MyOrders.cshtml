@@ -1,0 +1,96 @@
+﻿@model List<BuildStore.Models.Order>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        My Orders
+    </h1>
+
+    @if (!Model.Any())
+    {
+        <p>
+            You have no orders.
+        </p>
+    }
+    else
+    {
+        @foreach (var order in Model)
+        {
+            <div class="card mb-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex
+                                justify-content-between">
+
+                        <div>
+
+                            <h4>
+                                Order #@order.Id
+                            </h4>
+
+                            <p>
+                                Date:
+                                @order.CreatedAt
+                            </p>
+
+                            <p>
+                                Status:
+                                <strong>
+                                    @order.Status
+                                </strong>
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <h4>
+                                @order.TotalPrice $
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    @foreach (var item in order.Items)
+                    {
+                        <div class="d-flex
+                                    align-items-center
+                                    mb-3">
+
+                            <img src="~/images/@item.Product.ImagePath"
+                                 width="80"
+                                 height="80"
+                                 style="object-fit: contain;" />
+
+                            <div class="ms-3">
+
+                                <h5>
+                                    @item.Product.Name
+                                </h5>
+
+                                <p>
+                                    Quantity:
+                                    @item.Quantity
+                                </p>
+
+                                <p>
+                                    Price:
+                                    @item.Price $
+                                </p>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

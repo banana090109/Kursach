@@ -36,7 +36,6 @@ namespace BuildStore.Migrations
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     QuantityInStock = table.Column<int>(type: "integer", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Discriminator = table.Column<string>(type: "character varying(21)", maxLength: 21, nullable: false),
                     Weight = table.Column<double>(type: "double precision", nullable: true),
                     Unit = table.Column<string>(type: "text", nullable: true),

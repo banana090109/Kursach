@@ -91,8 +91,15 @@ namespace BuildStore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
@@ -115,7 +122,7 @@ namespace BuildStore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
@@ -143,9 +150,6 @@ namespace BuildStore.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -179,22 +183,7 @@ namespace BuildStore.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("CategoriesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("CategoryProduct");
-                });
-
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("BuildStore.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -219,6 +208,21 @@ namespace BuildStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
                 });
 
             modelBuilder.Entity("BuildStore.Models.ConstructionMaterial", b =>
@@ -267,7 +271,7 @@ namespace BuildStore.Migrations
 
             modelBuilder.Entity("BuildStore.Models.Cart", b =>
                 {
-                    b.HasOne("User", "User")
+                    b.HasOne("BuildStore.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -279,7 +283,7 @@ namespace BuildStore.Migrations
             modelBuilder.Entity("BuildStore.Models.CartItem", b =>
                 {
                     b.HasOne("BuildStore.Models.Cart", null)
-                        .WithMany("Items")
+                        .WithMany("CartItems")
                         .HasForeignKey("CartId");
 
                     b.HasOne("BuildStore.Models.Product", "Product")
@@ -293,7 +297,7 @@ namespace BuildStore.Migrations
 
             modelBuilder.Entity("BuildStore.Models.Order", b =>
                 {
-                    b.HasOne("User", "User")
+                    b.HasOne("BuildStore.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,15 +308,19 @@ namespace BuildStore.Migrations
 
             modelBuilder.Entity("BuildStore.Models.OrderItem", b =>
                 {
-                    b.HasOne("BuildStore.Models.Order", null)
+                    b.HasOne("BuildStore.Models.Order", "Order")
                         .WithMany("Items")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BuildStore.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
@@ -334,7 +342,7 @@ namespace BuildStore.Migrations
 
             modelBuilder.Entity("BuildStore.Models.Cart", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("BuildStore.Models.Order", b =>

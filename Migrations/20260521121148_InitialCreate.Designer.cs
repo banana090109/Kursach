@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BuildStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260521070341_InitialCreate")]
+    [Migration("20260521121148_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -147,9 +147,6 @@ namespace BuildStore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -282,7 +279,7 @@ namespace BuildStore.Migrations
             modelBuilder.Entity("BuildStore.Models.CartItem", b =>
                 {
                     b.HasOne("BuildStore.Models.Cart", null)
-                        .WithMany("Items")
+                        .WithMany("CartItems")
                         .HasForeignKey("CartId");
 
                     b.HasOne("BuildStore.Models.Product", "Product")
@@ -337,7 +334,7 @@ namespace BuildStore.Migrations
 
             modelBuilder.Entity("BuildStore.Models.Cart", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("BuildStore.Models.Order", b =>

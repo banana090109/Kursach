@@ -1,0 +1,117 @@
+﻿@model BuildStore.Models.Cart
+
+<h1>Your Cart</h1>
+
+@if (Model == null || !Model.CartItems.Any())
+{
+    <p>Cart is empty.</p>
+}
+else
+{
+    <div class="text-end mt-4">
+
+        <h3>
+            Total:
+            @Model.CartItems.Sum(i =>
+                     i.Quantity * i.Product.Price) $
+        </h3>
+
+        <form asp-controller="Order"
+              asp-action="Checkout"
+              method="post">
+
+            <button type="submit"
+                    class="btn btn-dark btn-lg">
+                Checkout
+            </button>
+
+        </form>
+
+    </div>
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Remove</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+
+
+
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+
+                    <td>
+
+                        <a asp-controller="Cart"
+                           asp-action="Remove"
+                           asp-route-itemId="@item.Id"
+                           class="btn btn-sm btn-danger">
+
+                            Remove
+
+                        </a>
+
+                    </td>
+
+                    <td>
+                        <img src="/@item.Product.ImagePath"
+                             width="100">
+                    </td>
+
+                    <td>
+                        @item.Product.Name
+                    </td>
+
+                    <td>
+                        @item.Product.Price $
+                    </td>
+
+                    <td>
+
+                        <a asp-controller="Cart"
+                           asp-action="Decrease"
+                           asp-route-itemId="@item.Id"
+                           class="btn btn-sm btn-dark">
+
+                            -
+
+                        </a>
+
+                        <span class="mx-2">
+                            @item.Quantity
+                        </span>
+
+                        <a asp-controller="Cart"
+                           asp-action="Increase"
+                           asp-route-itemId="@item.Id"
+                           class="btn btn-sm btn-dark">
+
+                            +
+
+                        </a>
+
+                    </td>
+
+                    <td>
+                        @(item.Product.Price * item.Quantity) $
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}

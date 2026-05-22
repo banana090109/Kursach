@@ -2,6 +2,8 @@
 using BuildStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using BuildStore.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace BuildStore.Controllers
 {
@@ -14,11 +16,40 @@ namespace BuildStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+    string search,
+    string category)
         {
-            var products = await _context.Products.ToListAsync();
+            var productsQuery = _context.Products
+                .Include(p => p.Categories)
+                .AsQueryable();
 
-            return View(products);
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                productsQuery = productsQuery.Where(p =>
+                    p.Name.ToLower().Contains(search.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                productsQuery = productsQuery.Where(p =>
+                    p.Categories.Any(c => c.Name == category));
+            }
+
+            var viewModel = new ProductCatalogViewModel
+            {
+                Products = await productsQuery.ToListAsync(),
+
+                Categories = await _context.Categories
+                    .OrderBy(c => c.Name)
+                    .ToListAsync(),
+
+                Search = search,
+
+                SelectedCategory = category
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -39,6 +70,30 @@ namespace BuildStore.Controllers
             }
 
             return View(product);
+        }
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Categories)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+        public async Task<IActionResult> Category(string name)
+        {
+            var products = await _context.Products
+                .Include(p => p.Categories)
+                .Where(p => p.Categories.Any(c => c.Name == name))
+                .ToListAsync();
+
+            ViewBag.CategoryName = name;
+
+            return View(products);
         }
     }
 }
