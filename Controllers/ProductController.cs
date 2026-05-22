@@ -16,24 +16,18 @@ namespace BuildStore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(
-    string search,
-    string category)
+        public async /*типу асинхроний*/ Task<IActionResult> Index(string search, string category) 
         {
-            var productsQuery = _context.Products
-                .Include(p => p.Categories)
-                .AsQueryable();
+            var productsQuery = _context.Products.Include(p => p.Categories).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                productsQuery = productsQuery.Where(p =>
-                    p.Name.ToLower().Contains(search.ToLower()));
+                productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(search.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                productsQuery = productsQuery.Where(p =>
-                    p.Categories.Any(c => c.Name == category));
+                productsQuery = productsQuery.Where(p => p.Categories.Any(c => c.Name == category));
             }
 
             var viewModel = new ProductCatalogViewModel

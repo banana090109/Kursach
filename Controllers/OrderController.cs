@@ -64,14 +64,24 @@ namespace BuildStore.Controllers
             int userId = int.Parse(userIdString);
 
             Cart? cart = _context.Carts
+
                 .Include(c => c.CartItems)
                 .ThenInclude(i => i.Product)
                 .FirstOrDefault(c =>
                     c.UserId == userId);
 
+            Console.WriteLine(cart == null);
+
+            Console.WriteLine(cart.CartItems == null);
+
+            Console.WriteLine(cart.CartItems.Count);
+
+
             if (cart == null ||
                 !cart.CartItems.Any())
             {
+                TempData["Error"] = "Cart is empty!";
+
                 return RedirectToAction(
                     "Index",
                     "Cart");
@@ -83,7 +93,7 @@ namespace BuildStore.Controllers
 
                 CreatedAt = DateTime.UtcNow,
 
-                Status = "Processing",
+                Status = OrderStatus.Processing,
 
                 TotalPrice = cart.CartItems.Sum(i =>
                     i.Quantity * i.Product.Price)
@@ -97,13 +107,23 @@ namespace BuildStore.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);//111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            }
+                Console.WriteLine(ex.Message);
+            }//111111111111111111111111111111111111111111111111111111
 
             foreach (CartItem item in cart.CartItems)
             {
-                OrderItem orderItem =
-                    new OrderItem
+                foreach (var i in cart.CartItems)
+                {
+                    Console.WriteLine(
+                        $"ITEM: {item.Product?.Name}");
+
+                    Console.WriteLine(
+                        $"PRICE: {item.Product?.Price}");
+                }
+
+                Console.WriteLine("BEFORE ORDER");
+
+                OrderItem orderItem = new OrderItem
                     {
                         OrderId = order.Id,
 
@@ -113,6 +133,7 @@ namespace BuildStore.Controllers
 
                         Price = item.Product.Price
                     };
+                Console.WriteLine("AFTER ORDER");
 
                 item.Product.QuantityInStock -=
                     item.Quantity;
@@ -120,8 +141,7 @@ namespace BuildStore.Controllers
                 _context.OrderItems.Add(orderItem);
             }
 
-            _context.CartItems.RemoveRange(
-                cart.CartItems);
+            _context.CartItems.RemoveRange(cart.CartItems);
 
             try
             {
@@ -132,8 +152,9 @@ namespace BuildStore.Controllers
                 Console.WriteLine(ex.Message);
             }//111111111111111111111111111111111111111111111111111111
 
-            return RedirectToAction(
-                "MyOrders");
+            TempData["Success"] = "Order created successfully!";
+
+            return RedirectToAction("MyOrders");
         }
     }
 }

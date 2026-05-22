@@ -8,6 +8,6 @@
 
         public User? User { get; set; }
 
-        public List<CartItem> CartItems { get; set; } = new();
+        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

@@ -3,6 +3,7 @@ using BuildStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BuildStore.Controllers
 {
@@ -18,7 +19,9 @@ namespace BuildStore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            int userId = 1;
+            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            int userId = int.Parse(userIdString);
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -30,7 +33,11 @@ namespace BuildStore.Controllers
 
         public async Task<IActionResult> Add(int productId)
         {
-            int userId = 1;
+            string? userIdString =
+            User.FindFirstValue(
+            ClaimTypes.NameIdentifier);
+
+            int userId = int.Parse(userIdString);
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -68,7 +75,7 @@ namespace BuildStore.Controllers
 
 
             await _context.SaveChangesAsync();
-
+            TempData["Success"] = "Product added to cart!";
             return Redirect(Request.Headers["Referer"].ToString());
         }
         public async Task<IActionResult> Increase(int itemId)
@@ -117,6 +124,77 @@ namespace BuildStore.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAjax(
+    int productId)
+        {
+            string? userIdString =
+                User.FindFirstValue(
+                    ClaimTypes.NameIdentifier);
+
+            int userId = int.Parse(userIdString);
+
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c =>
+                    c.UserId == userId);
+
+            if (cart == null)
+            {
+                cart = new Cart
+                {
+                    UserId = userId,
+                    CartItems = new List<CartItem>()
+                };
+
+                _context.Carts.Add(cart);
+
+                await _context.SaveChangesAsync();
+            }
+
+            var existingItem = cart.CartItems
+                .FirstOrDefault(ci =>
+                    ci.ProductId == productId);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                cart.CartItems.Add(new CartItem
+                {
+                    ProductId = productId,
+                    Quantity = 1
+                });
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+        [HttpGet]
+        public IActionResult GetCartCount()
+        {
+            string? userIdString =
+                User.FindFirstValue(
+                    ClaimTypes.NameIdentifier);
+
+            if (userIdString == null)
+            {
+                return Json(0);
+            }
+
+            int userId = int.Parse(userIdString);
+
+            int count = _context.CartItems
+                .Where(ci =>
+                    ci.Cart.UserId == userId)
+                .Sum(ci => ci.Quantity);
+
+            return Json(count);
         }
     }
 }

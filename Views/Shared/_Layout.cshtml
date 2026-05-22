@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BuildStore.styles.css" asp-append-version="true" />
 </head>
+<script>
+
+    async function updateCartCounter()
+    {
+        const response =
+            await fetch("/Cart/GetCartCount");
+
+        const count =
+            await response.json();
+
+        document
+            .getElementById("cart-counter")
+            .innerText = count;
+    }
+
+    updateCartCounter();
+
+</script>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -40,7 +58,7 @@
                             <a class="nav-link text-dark"
                                asp-controller="Cart"
                                asp-action="Index">
-                                Cart
+                                Cart (<span id="cart-counter">0</span>)
                             </a>
                         </li>
 
@@ -97,7 +115,41 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="container mt-3">
+                    <div class="alert alert-success alert-dismissible fade show">
+
+                        @TempData["Success"]
+
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert">
+                        </button>
+
+                    </div>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="container mt-3">
+                    <div class="alert alert-danger alert-dismissible fade show">
+
+                        @TempData["Error"]
+
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert">
+                        </button>
+
+                    </div>
+                </div>
+            }
+
             @RenderBody()
+
         </main>
     </div>
 
