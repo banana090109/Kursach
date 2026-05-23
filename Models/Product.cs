@@ -15,5 +15,7 @@
         public string ImagePath { get; set; }
 
         public List<Category> Categories { get; set; } = new();
+
+        public ICollection<ProductReview> Reviews { get; set; } = new List<ProductReview>();
     }
 }

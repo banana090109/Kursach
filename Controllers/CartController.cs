@@ -4,179 +4,89 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using BuildStore.Services;
 
 namespace BuildStore.Controllers
 {
     [Authorize]
     public class CartController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ICartService _cartService;
 
-        public CartController(AppDbContext context)
+        public CartController(
+            ICartService cartService)
         {
-            _context = context;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
         {
-            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userIdString =User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             int userId = int.Parse(userIdString);
 
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _cartService.GetCartAsync(userId);
 
             return View(cart);
         }
 
         public async Task<IActionResult> Add(int productId)
         {
-            string? userIdString =
-            User.FindFirstValue(
-            ClaimTypes.NameIdentifier);
+            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            int userId = int.Parse(userIdString);
+            int userId =int.Parse(userIdString);
 
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
-
-            if (cart == null)
-            {
-                cart = new Cart
-                {
-                    UserId = userId,
-                    CartItems = new List<CartItem>()
-                };
-
-                _context.Carts.Add(cart);
-
-                await _context.SaveChangesAsync();
-            }
-
-            var existingItem = cart.CartItems
-                .FirstOrDefault(ci => ci.ProductId == productId);
-
-            if (existingItem != null)
-            {
-                existingItem.Quantity++;
-            }
-            else
-            {
-                cart.CartItems.Add(new CartItem
-                {
-                    ProductId = productId,
-                    Quantity = 1
-                });
-            }
-
-
-
-            await _context.SaveChangesAsync();
+            await _cartService
+                .AddToCartAsync(
+                    userId,
+                    productId);
             TempData["Success"] = "Product added to cart!";
             return Redirect(Request.Headers["Referer"].ToString());
         }
+
         public async Task<IActionResult> Increase(int itemId)
         {
-            var item = await _context.CartItems
-                .FirstOrDefaultAsync(ci => ci.Id == itemId);
-
-            if (item != null)
-            {
-                item.Quantity++;
-
-                await _context.SaveChangesAsync();
-            }
-
+            await _cartService.IncreaseAsync(itemId);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Decrease(int itemId)
+        public async Task<IActionResult>
+    Decrease(int itemId)
         {
-            var item = await _context.CartItems
-                .FirstOrDefaultAsync(ci => ci.Id == itemId);
+            await _cartService
+                .DecreaseAsync(itemId);
 
-            if (item != null)
-            {
-                item.Quantity--;
-
-                if (item.Quantity <= 0)
-                {
-                    _context.CartItems.Remove(item);
-                }
-
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction("Index");
+            return RedirectToAction(
+                "Index");
         }
-        public async Task<IActionResult> Remove(int itemId)
+        public async Task<IActionResult>
+            Remove(int itemId)
         {
-            var item = await _context.CartItems
-                .FirstOrDefaultAsync(ci => ci.Id == itemId);
-
-            if (item != null)
-            {
-                _context.CartItems.Remove(item);
-
-                await _context.SaveChangesAsync();
-            }
+            await _cartService
+                .RemoveAsync(itemId);
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAjax(
-    int productId)
+        public async Task<IActionResult> AddAjax(int productId)
         {
             string? userIdString =
                 User.FindFirstValue(
                     ClaimTypes.NameIdentifier);
 
-            int userId = int.Parse(userIdString);
+            int userId =
+                int.Parse(userIdString);
 
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c =>
-                    c.UserId == userId);
-
-            if (cart == null)
-            {
-                cart = new Cart
-                {
-                    UserId = userId,
-                    CartItems = new List<CartItem>()
-                };
-
-                _context.Carts.Add(cart);
-
-                await _context.SaveChangesAsync();
-            }
-
-            var existingItem = cart.CartItems
-                .FirstOrDefault(ci =>
-                    ci.ProductId == productId);
-
-            if (existingItem != null)
-            {
-                existingItem.Quantity++;
-            }
-            else
-            {
-                cart.CartItems.Add(new CartItem
-                {
-                    ProductId = productId,
-                    Quantity = 1
-                });
-            }
-
-            await _context.SaveChangesAsync();
+            await _cartService
+                .AddAjaxAsync(
+                    userId,
+                    productId);
 
             return Ok();
         }
+
         [HttpGet]
-        public IActionResult GetCartCount()
+        public async Task<IActionResult> GetCartCount()
         {
             string? userIdString =
                 User.FindFirstValue(
@@ -187,12 +97,13 @@ namespace BuildStore.Controllers
                 return Json(0);
             }
 
-            int userId = int.Parse(userIdString);
+            int userId =
+                int.Parse(userIdString);
 
-            int count = _context.CartItems
-                .Where(ci =>
-                    ci.Cart.UserId == userId)
-                .Sum(ci => ci.Quantity);
+            int count =
+                await _cartService
+                    .GetCartCountAsync(
+                        userId);
 
             return Json(count);
         }

@@ -1,142 +1,264 @@
 ﻿@model BuildStore.Models.Product
 
-<div class="container mt-5 mb-5">
+<div class="row">
 
-    <div class="row">
+    <div class="col-md-6">
 
-        <div class="col-md-6">
+        <img src="/@Model.ImagePath"
+             class="img-fluid border rounded p-3 shadow-sm"
+             style="height:500px; width:100%; object-fit:contain; background:white;">
 
-            <img src="/@Model.ImagePath"
-                 class="img-fluid border rounded p-3 shadow-sm"
-                 style="height:500px; width:100%; object-fit:contain; background:white;">
+    </div>
+
+    <form asp-action="AddReview"
+          method="post"
+          class="mb-5">
+
+        <input type="hidden" name="productId" value="@Model.Id" />
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Rating
+
+            </label>
+
+            <select name="rating"
+                    class="form-select">
+
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+
+            </select>
 
         </div>
 
-        <div class="col-md-6">
+        <div class="mb-3">
 
-            <h1 style="word-break: break-word;">
-                @Model.Name
-            </h1>
+            <textarea name="content"
+                      class="form-control"
+                      rows="4"
+                      placeholder="Write your review..."></textarea>
 
-@*             <h1 class="mb-3" style="overflow-wrap:anywhere;">
-                @Model.Name
-            </h1> *@
+        </div>
 
-            <p class="text-muted">
+        <button type="submit"
+                class="btn btn-dark">
 
-                @(Model switch
-                {
-                    BuildStore.Models.ElectricalTool => "Electrical Tool",
-                    BuildStore.Models.HandTool => "Hand Tool",
-                    BuildStore.Models.ConstructionMaterial => "Construction Material",
-                    _ => "Unknown"
-                })
+            Submit Review
 
-            </p>
+        </button>
 
-            <h2 class="text-success mb-4">
-                @Model.Price $
-            </h2>
+    </form>
 
-            <p style="word-break: break-word;">
-                @Model.Description
+    <h3 class="mb-4">
+
+        Reviews
+
+    </h3>
+
+    @if (Model.Reviews.Any())
+    {
+        @foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+        {
+            <div class="card border-0 shadow-sm mb-4 rounded-4">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex
+                        justify-content-between">
+
+                        <strong>
+
+                            @review.User.Email
+
+                        </strong>
+
+                        <small class="text-muted">
+
+                            @review.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+
+                        </small>
+
+                    </div>
+
+                    <div class="mt-2 mb-3 fs-5">
+
+                        @for (int i = 0;
+                       i < review.Rating;
+                       i++)
+                        {
+                            <span>⭐</span>
+                        }
+
+                    </div>
+
+                    <p class="mb-0 text-secondary">
+
+                        @review.Content
+
+                    </p>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-muted">
+
+            No reviews yet.
+
+        </p>
+    }
+
+    <div class="col-md-6">
+
+        <h1 style="word-break: break-word;">
+            @Model.Name
+        </h1>
+
+        <p class="text-muted">
+
+            @(Model switch
+            {
+                BuildStore.Models.ElectricalTool => "Electrical Tool",
+                BuildStore.Models.HandTool => "Hand Tool",
+                BuildStore.Models.ConstructionMaterial => "Construction Material",
+                _ => "Unknown"
+            })
+
+        </p>
+
+        <h2 class="text-success mb-4">
+            @Model.Price $
+        </h2>
+
+        <p style="word-break: break-word;">
+            @Model.Description
+        </p>
+
+        <p>
+            <strong>In stock:</strong>
+            @Model.QuantityInStock
+        </p>
+
+        <hr />
+
+        @if (Model is BuildStore.Models.ElectricalTool electrical)
+        {
+            <h4>Electrical Specifications</h4>
+
+            <p>
+                <strong>Power:</strong>
+                @electrical.PowerWatts W
             </p>
 
             <p>
-                <strong>In stock:</strong>
-                @Model.QuantityInStock
+                <strong>Battery Powered:</strong>
+                @electrical.BatteryPowered
             </p>
 
-            <hr />
+            <p>
+                <strong>Warranty:</strong>
+                @electrical.WarrantyMonths months
+            </p>
+        }
 
-            @if (Model is BuildStore.Models.ElectricalTool electrical)
+        @if (Model is BuildStore.Models.HandTool handTool)
+        {
+            <h4>Hand Tool Specifications</h4>
+
+            <p>
+                <strong>Material:</strong>
+                @handTool.Material
+            </p>
+
+            <p>
+                <strong>Professional:</strong>
+                @handTool.ProfessionalSeries
+            </p>
+        }
+
+        @if (Model is BuildStore.Models.ConstructionMaterial material)
+        {
+            <h4>Material Specifications</h4>
+
+            <p>
+                <strong>Weight:</strong>
+                @material.Weight
+            </p>
+
+            <p>
+                <strong>Unit:</strong>
+                @material.Unit
+            </p>
+        }
+
+        <hr />
+
+        <h5>Categories</h5>
+
+        @if (Model.Categories.Any())
+        {
+            @foreach (var category in Model.Categories)
             {
-                <h4>Electrical Specifications</h4>
+                <a asp-controller="Product"
+                   asp-action="Category"
+                   asp-route-name="@category.Name"
+                   class="badge bg-dark text-decoration-none me-2">
 
-                <p>
-                    <strong>Power:</strong>
-                    @electrical.PowerWatts W
-                </p>
-
-                <p>
-                    <strong>Battery Powered:</strong>
-                    @electrical.BatteryPowered
-                </p>
-
-                <p>
-                    <strong>Warranty:</strong>
-                    @electrical.WarrantyMonths months
-                </p>
-            }
-
-            @if (Model is BuildStore.Models.HandTool handTool)
-            {
-                <h4>Hand Tool Specifications</h4>
-
-                <p>
-                    <strong>Material:</strong>
-                    @handTool.Material
-                </p>
-
-                <p>
-                    <strong>Professional:</strong>
-                    @handTool.ProfessionalSeries
-                </p>
-            }
-
-            @if (Model is BuildStore.Models.ConstructionMaterial material)
-            {
-                <h4>Material Specifications</h4>
-
-                <p>
-                    <strong>Weight:</strong>
-                    @material.Weight
-                </p>
-
-                <p>
-                    <strong>Unit:</strong>
-                    @material.Unit
-                </p>
-            }
-
-            <hr />
-
-            <h5>Categories</h5>
-
-            @if (Model.Categories.Any())
-            {
-                @foreach (var category in Model.Categories)
-                {
-                    <a asp-controller="Product"
-                       asp-action="Category"
-                       asp-route-name="@category.Name"
-                       class="badge bg-dark text-decoration-none me-2">
-
-                        @category.Name
-
-                    </a>
-                }
-            }
-            else
-            {
-                <p>No categories.</p>
-            }
-
-            <div class="mt-4">
-
-                <a asp-controller="Cart"
-                   asp-action="Add"
-                   asp-route-productId="@Model.Id"
-                   class="btn btn-dark btn-lg">
-
-                    Add To Cart
+                    @category.Name
 
                 </a>
+            }
+        }
+        else
+        {
+            <p>No categories.</p>
+        }
 
-            </div>
+        <div class="mt-4">
+
+            <a asp-controller="Cart"
+               asp-action="Add"
+               asp-route-productId="@Model.Id"
+               class="btn btn-dark btn-lg">
+
+                Add To Cart
+
+            </a>
 
         </div>
 
     </div>
+
+    @if (Model.Reviews.Any())
+    {
+        <div class="mb-3">
+
+            <strong>
+
+                Rating:
+
+            </strong>
+
+            @Math.Round(Model.Reviews.Average(r => r.Rating), 1) ⭐(@Model.Reviews.Count reviews)
+
+        </div>
+    }
+    else
+    {
+        <div class="text-muted mb-3">
+
+            No reviews yet
+
+        </div>
+    }
 
 </div>

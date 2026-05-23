@@ -29,5 +29,7 @@ namespace BuildStore.Data
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<ProductReview> ProductReviews { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using BuildStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BuildStore.Services;
 
 namespace BuildStore
 {
@@ -15,13 +16,18 @@ namespace BuildStore
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
-            
+
             builder.Services
             .AddAuthentication(
                 CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options => { options.LoginPath = "/Account/Login"; });
                     
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICartService,CartService>();
+            builder.Services.AddScoped<IOrderService,OrderService>();
+            builder.Services.AddScoped<IAccountService,AccountService>();
 
             var app = builder.Build();
 

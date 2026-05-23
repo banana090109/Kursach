@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EDJXdLKJvLeL4EpbRjhKBTVu7Dlw463owgn8AEZRVck=",
+  "Hash": "hGr4jvpc7wq3RuamKYgtF4YDDqq4S+3Lgy/XkCisYBQ=",
   "Source": "BuildStore",
   "BasePath": "_content/BuildStore",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "0h5l16xy8t",
-      "Integrity": "9Bd6TpZLwEZgGULZUGLuOn5jMwtb+FjgT609OkpCpFk=",
+      "Fingerprint": "ibu8oqesbu",
+      "Integrity": "fus2614kGlNf8Yt4JX/4TNr54SUmu2kiYY8ehYpihII=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1506,51 +1506,6 @@
       ]
     },
     {
-      "Route": "css/site.0h5l16xy8t.css",
-      "AssetFile": "D:\\Projects\\С#\\BuildStore\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1240"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"9Bd6TpZLwEZgGULZUGLuOn5jMwtb+FjgT609OkpCpFk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 22 May 2026 14:12:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "0h5l16xy8t"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-9Bd6TpZLwEZgGULZUGLuOn5jMwtb+FjgT609OkpCpFk="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "D:\\Projects\\С#\\BuildStore\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1561,7 +1516,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1240"
+          "Value": "4194"
         },
         {
           "Name": "Content-Type",
@@ -1569,11 +1524,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9Bd6TpZLwEZgGULZUGLuOn5jMwtb+FjgT609OkpCpFk=\""
+          "Value": "\"fus2614kGlNf8Yt4JX/4TNr54SUmu2kiYY8ehYpihII=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 22 May 2026 14:12:19 GMT"
+          "Value": "Sat, 23 May 2026 09:39:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1583,7 +1538,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9Bd6TpZLwEZgGULZUGLuOn5jMwtb+FjgT609OkpCpFk="
+          "Value": "sha256-fus2614kGlNf8Yt4JX/4TNr54SUmu2kiYY8ehYpihII="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ibu8oqesbu.css",
+      "AssetFile": "D:\\Projects\\С#\\BuildStore\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4194"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fus2614kGlNf8Yt4JX/4TNr54SUmu2kiYY8ehYpihII=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 23 May 2026 09:39:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ibu8oqesbu"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fus2614kGlNf8Yt4JX/4TNr54SUmu2kiYY8ehYpihII="
         }
       ]
     },

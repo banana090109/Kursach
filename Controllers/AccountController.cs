@@ -6,14 +6,20 @@ using BCrypt.Net;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BuildStore.Services;
 
 namespace BuildStore.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAccountService _accountService;
 
-        public IActionResult Profile()
+        public AccountController(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
+
+        public async Task<IActionResult> Profile()
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -27,8 +33,7 @@ namespace BuildStore.Controllers
 
             int userId = int.Parse(userIdString);
 
-            User? user = _context.Users
-                .FirstOrDefault(u => u.Id == userId);
+            User? user = await _accountService.GetByIdAsync(userId);
 
             if (user == null)
             {
@@ -36,9 +41,7 @@ namespace BuildStore.Controllers
                     "Login");
             }
 
-            List<Order> orders = _context.Orders
-                .Where(o => o.UserId == userId)
-                .ToList();
+            List<Order> orders = await _accountService.GetUserOrdersAsync(userId);
 
             ViewBag.TotalOrders = orders.Count;
 
@@ -48,11 +51,6 @@ namespace BuildStore.Controllers
             return View(user);
         }
 
-        public AccountController(AppDbContext context)
-        {
-            _context = context;
-        }
-
         [HttpGet]
         public IActionResult Register()
         {
@@ -60,15 +58,14 @@ namespace BuildStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            bool emailExists = _context.Users
-                .Any(u => u.Email == model.Email);
+            bool emailExists = await _accountService.EmailExistsAsync(model.Email);
 
             if (emailExists)
             {
@@ -79,20 +76,8 @@ namespace BuildStore.Controllers
                 return View(model);
             }
 
-            User user = new User
-            {
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-
-                PasswordHash = BCrypt.Net.BCrypt
-                    .HashPassword(model.Password),
-
-                CreatedAt = DateTime.UtcNow
-            };
-
-            _context.Users.Add(user);
-
-            _context.SaveChanges();
+            await _accountService
+                .CreateUserAsync(model);
 
             return RedirectToAction(
                 "Login",
@@ -124,8 +109,10 @@ namespace BuildStore.Controllers
                 return View(model);
             }
 
-            User? user = _context.Users
-                .FirstOrDefault(u => u.Email == model.Email);
+            User? user =
+    await _accountService
+        .GetByEmailAsync(
+            model.Email);
 
             if (user == null)
             {

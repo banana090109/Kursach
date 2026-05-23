@@ -1,24 +1,23 @@
 ﻿@model BuildStore.Models.ViewModels.ProductCatalogViewModel
 
-<h1 class="mb-4">Products</h1>
-<form method="get" class="mb-4">
+<form method="get" class="mb-5">
 
     <a asp-controller="Product"
        asp-action="Index"
-       class="btn btn-outline-secondary">
+       class="btn btn-outline-secondary mb-3">
 
         Reset
 
     </a>
 
-    <div class="row">
+    <div class="row g-3 mb-4">
 
         <div class="col-md-5">
 
             <input type="text"
                    name="search"
                    value="@Model.Search"
-                   class="form-control form-control-lg"
+                   class="form-control shadow-sm border-0"
                    placeholder="Search products..." />
 
         </div>
@@ -26,7 +25,7 @@
         <div class="col-md-4">
 
             <select name="category"
-                    class="form-select form-select-lg">
+                    class="form-select shadow-sm border-0">
 
                 <option value="">
                     All Categories
@@ -49,7 +48,7 @@
         <div class="col-md-3">
 
             <button type="submit"
-                    class="btn btn-dark w-100">
+                    class="btn btn-dark shadow-sm w-100">
 
                 Search
 
@@ -61,22 +60,21 @@
 
 </form>
 
-<div class="row">
+@if (Model.Products.Any())
+{
+    <div class="row">
 
-    @if (Model.Products.Any())
-    {
         @foreach (var product in Model.Products)
         {
             <div class="col-md-4 mb-4">
 
-                <div class="card h-100 shadow-sm border-0 product-card">
+                <div class="card product-card h-100 shadow-sm rounded-4 border-0">
 
                     <div class="product-image-wrapper">
 
                         <img src="/@product.ImagePath"
-                             class="card-img-top p-3"
-                             style="height:250px;
-                        object-fit:contain;">
+                             class="card-img-top product-image p-4"
+                             style="height:250px; object-fit:contain;">
 
                     </div>
 
@@ -143,71 +141,71 @@
 
             </div>
         }
-    }
-    else
-    {
-        <div class="text-center mt-5">
 
-            <h3>;( No products found ;(</h3>
+    </div>
+}
+else
+{
+    <div class="text-center mt-5">
 
-            <p class="text-muted">
-                Try another search or category.
-            </p>
+        <h3>;( No products found ;(</h3>
 
-        </div>
-    }
-    }
-    <script>
+        <p class="text-muted">
+            Try another search or category.
+        </p>
 
-        document
-            .querySelectorAll(".add-to-cart-btn")
+    </div>
+}
 
-            .forEach(button =>
-            {
-                button.addEventListener("click", async () =>
-                {
-                    const productId =
-                        button.dataset.productId;
+<script>
 
-                    const response = await fetch(
-                        `/Cart/AddAjax?productId=${productId}`,
-                        {
-                            method: "POST"
-                        });
+    document
+        .querySelectorAll(".add-to-cart-btn")
 
-                    if (response.ok)
-                    {
-                        showToast("✅ Product added to cart");
-
-                            updateCartCounter();
-                    }
-                    else
-                    {
-                        showToast("❌ Error adding product");
-                    }
-                });
-            });
-
-        function showToast(message)
+        .forEach(button =>
         {
-            const toast = document.createElement("div");
-
-            toast.className =
-                "toast-notification";
-
-            toast.innerText = message;
-
-            document.body.appendChild(toast);
-
-            setTimeout(() =>
+            button.addEventListener("click", async () =>
             {
-                toast.classList.add("show");
-            }, 100);
+                const productId = button.dataset.productId;
 
-            setTimeout(() =>
-            {
-                toast.remove();
-            }, 3000);
-        }
+                const response = await fetch(`/Cart/AddAjax?productId=${productId}`,
+                    {
+                        method: "POST"
+                    });
 
-    </script>
+                if (response.ok)
+                {
+                    showToast("✅ Product added to cart");
+
+                    updateCartCounter();
+                }
+                else
+                {
+                    showToast("❌ Error adding product");
+                }
+            });
+        });
+
+    function showToast(message)
+    {
+        const toast = document.createElement("div");
+
+        toast.className =
+            "toast-notification";
+
+        toast.innerText = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(() =>
+        {
+            toast.classList.add("show");
+        }, 100);
+
+        setTimeout(() =>
+        {
+            toast.remove();
+        }, 3000);
+    }
+
+</script>

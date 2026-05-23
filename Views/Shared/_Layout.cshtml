@@ -1,65 +1,98 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BuildStore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BuildStore.styles.css" asp-append-version="true" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Monolit
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
 </head>
-<script>
 
-    async function updateCartCounter()
-    {
-        const response =
-            await fetch("/Cart/GetCartCount");
-
-        const count =
-            await response.json();
-
-        document
-            .getElementById("cart-counter")
-            .innerText = count;
-    }
-
-    updateCartCounter();
-
-</script>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BuildStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+        <nav class="navbar
+                    navbar-expand-lg
+                    navbar-light
+                    shadow-sm
+                    border-bottom">
+
+            <div class="container">
+
+                <a class="navbar-brand fw-bold"
+                   asp-controller="Product"
+                   asp-action="Index">
+
+                    Monolit
+
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse"
+                     id="navbarNav">
+
+                    <ul class="navbar-nav me-auto">
 
                         <li class="nav-item">
+
                             <a class="nav-link text-dark"
                                asp-controller="Order"
                                asp-action="MyOrders">
+
                                 Orders
+
                             </a>
+
                         </li>
 
                         <li class="nav-item">
+
                             <a class="nav-link text-dark"
                                asp-controller="Product"
                                asp-action="Index">
+
                                 Products
+
                             </a>
+
                         </li>
 
                         <li class="nav-item">
+
                             <a class="nav-link text-dark"
                                asp-controller="Cart"
                                asp-action="Index">
-                                Cart (<span id="cart-counter">0</span>)
+
+                                Cart
+                                (<span id="cart-counter">
+                                    @ViewBag.CartCount
+                                </span>)
+
                             </a>
+
                         </li>
 
                     </ul>
@@ -70,6 +103,7 @@
                         User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+
                                 <a class="nav-link text-dark"
                                    asp-controller="Account"
                                    asp-action="Profile">
@@ -79,88 +113,191 @@
                                              .ClaimTypes.Email)?.Value
 
                                 </a>
+
                             </li>
 
                             <li class="nav-item">
+
                                 <a class="nav-link text-dark"
                                    asp-controller="Account"
                                    asp-action="Logout">
+
                                     Logout
+
                                 </a>
+
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
+
                                 <a class="nav-link text-dark"
                                    asp-controller="Account"
                                    asp-action="Login">
+
                                     Login
+
                                 </a>
+
                             </li>
 
                             <li class="nav-item">
+
                                 <a class="nav-link text-dark"
                                    asp-controller="Account"
                                    asp-action="Register">
+
                                     Register
+
                                 </a>
+
                             </li>
                         }
 
                     </ul>
+
                 </div>
+
             </div>
+
         </nav>
+
     </header>
-    <div class="container">
+
+    <div class="container mt-4">
+
         <main role="main" class="pb-3">
-
-            @if (TempData["Success"] != null)
-            {
-                <div class="container mt-3">
-                    <div class="alert alert-success alert-dismissible fade show">
-
-                        @TempData["Success"]
-
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="alert">
-                        </button>
-
-                    </div>
-                </div>
-            }
-
-            @if (TempData["Error"] != null)
-            {
-                <div class="container mt-3">
-                    <div class="alert alert-danger alert-dismissible fade show">
-
-                        @TempData["Error"]
-
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="alert">
-                        </button>
-
-                    </div>
-                </div>
-            }
 
             @RenderBody()
 
         </main>
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - BuildStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top mt-5">
+
+        <div class="container py-4">
+
+            <div class="d-flex
+                        justify-content-between
+                        align-items-center
+                        flex-wrap
+                        gap-3">
+
+                <div>
+
+                    <h5 class="fw-bold mb-1">
+                        MONOLIT
+                    </h5>
+
+                    <p class="text-muted mb-0">
+
+                        Everything for renovation.
+
+                    </p>
+
+                </div>
+
+                <div class="text-muted">
+
+                    © 2026 Monolit.
+                    All rights reserved.
+
+                </div>
+
+            </div>
+
         </div>
+
     </footer>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="toast-container
+                    position-fixed
+                    bottom-0
+                    start-0
+                    p-3">
+
+            <div id="successToast"
+                 class="toast
+                        align-items-center
+                        text-bg-success
+                        border-0"
+                 role="alert">
+
+                <div class="d-flex">
+
+                    <div class="toast-body">
+
+                        @TempData["Success"]
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close
+                                   btn-close-white
+                                   me-2
+                                   m-auto"
+                            data-bs-dismiss="toast">
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    <script>
+
+        async function updateCartCounter()
+        {
+            const response =
+                await fetch("/Cart/GetCartCount");
+
+            const count =
+                await response.json();
+
+            const counter =
+                document.getElementById(
+                    "cart-counter");
+
+            if (counter)
+            {
+                counter.innerText = count;
+            }
+        }
+
+        updateCartCounter();
+
+        const toastElement =
+            document.getElementById(
+                "successToast");
+
+        if (toastElement)
+        {
+            const toast =
+                new bootstrap.Toast(
+                    toastElement);
+
+            toast.show();
+        }
+
+    </script>
+
+    @await RenderSectionAsync(
+            "Scripts",
+            required: false)
+
 </body>
+
 </html>
