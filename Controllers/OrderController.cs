@@ -23,11 +23,8 @@ namespace BuildStore.Controllers
             MyOrders()
         {
             string? userIdString =User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             int userId = int.Parse(userIdString);
-
             List<Order> orders =  await _orderService.GetUserOrdersAsync(userId);
-
             return View(orders);
         }
 
@@ -35,17 +32,10 @@ namespace BuildStore.Controllers
         public async Task<IActionResult>
         Checkout()
         {
-            string? userIdString =
-                User.FindFirstValue(
-                    ClaimTypes.NameIdentifier);
-
+            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             int userId = int.Parse(userIdString);
-
             await _orderService.CheckoutAsync(userId);
-
-            //TempData["Success"] =
-            //    "Order created successfully!";
-
+            //TempData["Success"] = "Order created successfully!";
             return RedirectToAction("MyOrders");
         }
     }

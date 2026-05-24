@@ -6,7 +6,7 @@ namespace BuildStore.Services
     {
         Task<Cart> GetCartAsync(int userId);
 
-        Task AddToCartAsync(int userId,int productId);
+        //Task AddToCartAsync(int userId,int productId);
 
         Task IncreaseAsync(int itemId);
 
@@ -14,7 +14,7 @@ namespace BuildStore.Services
 
         Task RemoveAsync(int itemId);
 
-        Task AddAjaxAsync(int userId, int productId);
+        Task<(bool Success, string Message)> AddAjaxAsync(int userId, int productId);
 
         Task<int> GetCartCountAsync(int userId);
     }

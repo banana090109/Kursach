@@ -19,9 +19,32 @@ namespace BuildStore.Services
             return
                 await _context.Carts.Include(c => c.CartItems).ThenInclude(ci => ci.Product).FirstOrDefaultAsync(c => c.UserId == userId);
         }
-        public async Task AddAjaxAsync(int userId,int productId)
+        public async Task<(bool Success, string Message)> AddAjaxAsync(int userId, int productId)
         {
-            await AddToCartAsync(userId,productId);
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null)
+                return (false, "Product not found.");
+
+            if (product.Stock <= 0)
+                return (false, "This product is out of stock.");
+
+            // Твоя оригінальна логіка додавання в кошик
+            var existingItem = await _context.CartItems.FirstOrDefaultAsync(ci => ci.UserId == userId && ci.ProductId == productId);
+
+            if (existingItem != null)
+                existingItem.Quantity += 1;
+            else
+            {
+                _context.CartItems.Add(new CartItem
+                {
+                    UserId = userId,
+                    ProductId = productId,
+                    Quantity = 1
+                });
+            }
+
+            await _context.SaveChangesAsync();
+            return (true, "Product added to cart");
         }
 
         public async Task<int>
@@ -51,9 +74,7 @@ namespace BuildStore.Services
             var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
 
             if (existingItem != null)
-            {
                 existingItem.Quantity++;
-            }
             else
             {
                 cart.CartItems.Add(new CartItem
@@ -67,21 +88,14 @@ namespace BuildStore.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task IncreaseAsync(
-            int itemId)
+        public async Task IncreaseAsync(int itemId)
         {
-            var item =
-                await _context.CartItems
-
-                .FirstOrDefaultAsync(ci =>
-                    ci.Id == itemId);
+            var item = await _context.CartItems.FirstOrDefaultAsync(ci => ci.Id == itemId);
 
             if (item != null)
             {
                 item.Quantity++;
-
-                await _context
-                    .SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -89,42 +103,28 @@ namespace BuildStore.Services
             int itemId)
         {
             var item =
-                await _context.CartItems
-
-                .FirstOrDefaultAsync(ci =>
-                    ci.Id == itemId);
+                await _context.CartItems.FirstOrDefaultAsync(ci => ci.Id == itemId);
 
             if (item != null)
             {
                 item.Quantity--;
 
                 if (item.Quantity <= 0)
-                {
-                    _context.CartItems
-                        .Remove(item);
-                }
+                    _context.CartItems.Remove(item);
 
-                await _context
-                    .SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public async Task RemoveAsync(
-            int itemId)
+        public async Task RemoveAsync(int itemId)
         {
-            var item =
-                await _context.CartItems
-
-                .FirstOrDefaultAsync(ci =>
-                    ci.Id == itemId);
+            var item = await _context.CartItems.FirstOrDefaultAsync(ci => ci.Id == itemId);
 
             if (item != null)
             {
-                _context.CartItems
-                    .Remove(item);
+                _context.CartItems.Remove(item);
 
-                await _context
-                    .SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
         }
     }

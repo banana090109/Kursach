@@ -159,32 +159,33 @@ else
 
 <script>
 
-    document
-        .querySelectorAll(".add-to-cart-btn")
+    document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+        button.addEventListener("click", async () => {
+            const productId = button.dataset.productId;
 
-        .forEach(button =>
-        {
-            button.addEventListener("click", async () =>
-            {
-                const productId = button.dataset.productId;
+            try {
+                const response = await fetch(`/Cart/AddAjax?productId=${productId}`, {
+                    method: "POST"
+                });
 
-                const response = await fetch(`/Cart/AddAjax?productId=${productId}`,
-                    {
-                        method: "POST"
-                    });
+                if (!response.ok) {
+                    showToast("❌ Network error");
+                    return;
+                }
 
-                if (response.ok)
-                {
-                    showToast("✅ Product added to cart");
+                const data = await response.json();
 
+                if (data.success) {
+                    showToast("✅ " + data.message);
                     updateCartCounter();
+                } else {
+                    showToast("❌ " + data.message);
                 }
-                else
-                {
-                    showToast("❌ Error adding product");
-                }
-            });
+            } catch (error) {
+                showToast("❌ Error: " + error.message);
+            }
         });
+    });
 
     function showToast(message)
     {

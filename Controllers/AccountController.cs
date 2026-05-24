@@ -22,31 +22,22 @@ namespace BuildStore.Controllers
         public async Task<IActionResult> Profile()
         {
             if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction(
-                    "Login");
-            }
+                return RedirectToAction("Login");
 
-            string? userIdString =
-                User.FindFirstValue(
-                    ClaimTypes.NameIdentifier);
+            string? userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             int userId = int.Parse(userIdString);
 
             User? user = await _accountService.GetByIdAsync(userId);
 
             if (user == null)
-            {
-                return RedirectToAction(
-                    "Login");
-            }
+                return RedirectToAction("Login");
 
             List<Order> orders = await _accountService.GetUserOrdersAsync(userId);
 
             ViewBag.TotalOrders = orders.Count;
 
-            ViewBag.TotalSpent = orders.Sum(o =>
-                o.TotalPrice);
+            ViewBag.TotalSpent = orders.Sum(o => o.TotalPrice);
 
             return View(user);
         }
@@ -79,9 +70,7 @@ namespace BuildStore.Controllers
             await _accountService
                 .CreateUserAsync(model);
 
-            return RedirectToAction(
-                "Login",
-                "Account");
+            return RedirectToAction("Login", "Account");
         }
 
         public async Task<IActionResult> Logout()
@@ -146,24 +135,24 @@ namespace BuildStore.Controllers
                 user.Email)
             };
 
-                ClaimsIdentity identity =
-                    new ClaimsIdentity(
-                        claims,
-                        CookieAuthenticationDefaults
-                            .AuthenticationScheme);
-
-                ClaimsPrincipal principal =
-                    new ClaimsPrincipal(identity);
-
-                await HttpContext.SignInAsync(
+            ClaimsIdentity identity =
+                new ClaimsIdentity(
+                    claims,
                     CookieAuthenticationDefaults
-                        .AuthenticationScheme,
+                        .AuthenticationScheme);
 
-                    principal);
+            ClaimsPrincipal principal =
+                new ClaimsPrincipal(identity);
 
-                return RedirectToAction(
-                    "Index",
-                    "Product");
-            }
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults
+                    .AuthenticationScheme,
+
+                principal);
+
+            return RedirectToAction(
+                "Index",
+                "Product");
+        }
     }
 }

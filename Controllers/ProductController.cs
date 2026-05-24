@@ -20,29 +20,16 @@ namespace BuildStore.Controllers
             _productService = productService;
         }
 
-        public async Task<IActionResult> Index(
-            string search,
-            string category)
+        public async Task<IActionResult> Index(string search,string category)
         {
-            ProductCatalogViewModel viewModel =
-                await _productService
-                    .GetCatalogAsync(
-                        search,
-                        category);
-
+            ProductCatalogViewModel viewModel = await _productService.GetCatalogAsync(search,category);
             return View(viewModel);
         }
-        public async Task<IActionResult>
-    Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            Product product =
-                await _productService
-                    .GetByIdAsync(id);
-
+            Product product =await _productService.GetByIdAsync(id);
             if (product == null)
-            {
                 return NotFound();
-            }
 
             return View(product);
         }
