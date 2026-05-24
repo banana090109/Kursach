@@ -6,8 +6,6 @@ namespace BuildStore.Services
     {
         Task<Cart> GetCartAsync(int userId);
 
-        //Task AddToCartAsync(int userId,int productId);
-
         Task IncreaseAsync(int itemId);
 
         Task DecreaseAsync(int itemId);
